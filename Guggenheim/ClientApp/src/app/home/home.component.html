@@ -1,0 +1,12 @@
+<h1>Meter</h1>
+
+<p aria-live="polite">Current count: <strong>{{ currentCount }}</strong></p>
+
+<input type="number" />
+<input type="number" />
+<input type="date" />
+<input type="time" />
+
+<button class="btn btn-primary" (click)="getFare()">Get Fare</button>
+
+<p aria-live="polite">Fare: <strong>${{ total_fare }}</strong></p>
