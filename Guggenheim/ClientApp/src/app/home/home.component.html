@@ -1,12 +1,41 @@
 <h1>Meter</h1>
 
-<p aria-live="polite">Current count: <strong>{{ currentCount }}</strong></p>
+<style>
+  label{
+    display:inline;
+  }
+  label:after{
+    content:"\a";
+    white-space: pre;
+  }
 
-<input type="number" />
-<input type="number" />
-<input type="date" />
-<input type="time" />
+  p{
+    font-size: 20px;
+  }
+</style>
+<div>
+  <label>
+    Minutes Above 6 MPH: <input id="minutes_above_6" type="number" [ngModel]="minutes_above_6" (ngModelChange)="changeValue('minutes_above_6',$event)" />
+  </label>
+  <label>
+    Miles Below 6 MPH: <input id="miles_below_6" type="number" [ngModel]="miles_below_6" (ngModelChange)="changeValue('miles_below_6',$event)" />
+  </label>
+  <label>
+    Date: <input id="date" type="date" [ngModel]="date" (ngModelChange)="changeValue('date',$event)" />
+  </label>
+  <label>
+    Start Time: <input id="start_time" type="time" [ngModel]="start_time" (ngModelChange)="changeValue('start_time',$event)" />
+  </label>
 
-<button class="btn btn-primary" (click)="getFare()">Get Fare</button>
+  <p aria-live="polite">Fare: <strong>${{ minutes_above_6 }}</strong></p>
+  <p aria-live="polite">Fare: <strong>${{ miles_below_6 }}</strong></p>
+  <p aria-live="polite">Fare: <strong>${{ date }}</strong></p>
+  <p aria-live="polite">Fare: <strong>${{ start_time }}</strong></p>
 
-<p aria-live="polite">Fare: <strong>${{ total_fare }}</strong></p>
+  <p *ngIf="minutes_above_6 && miles_below_6 && date && start_time; else FillParameters" aria-live="polite">Fare: <strong>${{ total_fare }}</strong></p>
+
+  <ng-template #FillParameters>
+    <p>Please fill all parameters first.</p>
+  </ng-template>
+
+</div>
